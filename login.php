@@ -7,13 +7,6 @@
  * Author URI: https://google.com (I am the founder)
  */
 
-function alert_plugin_activated() {
-    echo '<script>';
-    echo 'alert("ACTIVATED");';
-    echo '</script>';
-}
-
-
 add_action('wp_dashboard_setup', 'my_custom_dashboard_widgets');
 
 function my_custom_dashboard_widgets() {
@@ -22,15 +15,24 @@ function my_custom_dashboard_widgets() {
     wp_add_dashboard_widget('custom_help_widget', 'Dealer Analytics', 'custom_dashboard_help');
 }
 
-function custom_dashboard_help() {
-    echo '<h1>Login</h1>';
-    echo '<form method="GET" action="greet_user.php">
-                <input type="email" name="email">
-                <input type="password">
-                <br>
-                <input type="submit" value="Login">
-          </form>';
-    echo '<a href="https://dealeranalytics.com" target="_blank">Contact Us</p>';
-}
-?>
+    function custom_dashboard_help() {
 
+        $loggedIn = $_GET['email'];
+
+        if(isset($loggedIn)) {
+?>
+            <h1>Welcome <?=$_GET["email"];?>!</h1>
+            <p>Here are your stats so far: </p>
+            <p></p>
+<?php   } else { ?>
+            <h1>Login</h1>
+            <form method="GET">
+                        <input type="email" name="email">
+                        <input type="password">
+                        <br>
+                        <input type="submit" value="Login">
+                </form>
+            <a href="https://dealeranalytics.com" target="_blank">Contact Us</p>
+<?php   }
+    }
+?>
