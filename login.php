@@ -14,7 +14,7 @@ function alert_plugin_activated() {
 }
 
 
-add_action('wp_dashboard_setup', 'my_custom_dashboard_widgets') ;
+add_action('wp_dashboard_setup', 'my_custom_dashboard_widgets');
 
 function my_custom_dashboard_widgets() {
     global $wp_meta_boxes;
@@ -23,14 +23,14 @@ function my_custom_dashboard_widgets() {
 }
 
 function custom_dashboard_help() {
-    echo '<h1>Login</h1>
-        <form method="GET" action="greet_user.php">
-            <input type="email" name="email">
-            <input type="password">
-            <br>
-            <input type="submit" value="Login">
-        </form>
-        <a href="https://dealeranalytics.com" target="_blank">Contact Us</p>';
+    echo '<h1>Login</h1>';
+    echo '<form method="GET" action="greet_user.php">
+                <input type="email" name="email">
+                <input type="password">
+                <br>
+                <input type="submit" value="Login">
+          </form>';
+    echo '<a href="https://dealeranalytics.com" target="_blank">Contact Us</p>';
 }
 ?>
 
