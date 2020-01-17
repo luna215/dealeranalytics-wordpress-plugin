@@ -29,10 +29,11 @@
             <?php
                 $json_data = callAPI("GET", "https://cat-fact.herokuapp.com/facts");
                 $data_arr = json_decode($json_data, true);
+                $number = rand(0, 255);
             ?>
-            <p><?php echo $data_arr["all"]["0"]["_id"] ?></p>
-            <p><?php echo $data_arr["all"]["0"]["text"] ?></p>
-            <p><?php echo $data_arr["all"]["0"]["type"] ?></p>
+            <p><?php echo $data_arr["all"]["$number"]["_id"] ?></p>
+            <p><?php echo $data_arr["all"]["${number}"]["text"] ?></p>
+            <p><?php echo $data_arr["all"][$number]["type"] ?></p>
 <?php   } else { ?>
             <h1>Login</h1>
             <form method="GET">
