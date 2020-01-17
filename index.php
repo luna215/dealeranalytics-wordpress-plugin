@@ -17,7 +17,10 @@
 
     function custom_dashboard_help() {
 
-        $loggedIn = $_GET['email'];
+        $loggedIn = NULL;
+        if(is_email($_GET['email'])) {
+            $loggedIn = sanitize_email($_GET['email']);
+        }
 
         if(isset($loggedIn)) {
 ?>
@@ -30,7 +33,7 @@
             <p><?php echo $data_arr["all"]["0"]["_id"] ?></p>
             <p><?php echo $data_arr["all"]["0"]["text"] ?></p>
             <p><?php echo $data_arr["all"]["0"]["type"] ?></p>
-            <?php   } else { ?>
+<?php   } else { ?>
             <h1>Login</h1>
             <form method="GET">
                         <input type="email" name="email" required>
