@@ -27,16 +27,14 @@
                 $json_data = callAPI("GET", "https://cat-fact.herokuapp.com/facts");
                 $data_arr = json_decode($json_data, true);
             ?>
-            <!-- <p><?php echo $data_arr[0]->_id ?></p>
-            <p><?php $data_arr[0]->text ?></p> -->
-            <p><?php echo $data_arr[0]->type ?></p>
-            <h2>SPLIT</h2>
-            <p><?php print_r($data_arr) ?></p>
+            <p><?php echo $data_arr["all"]["0"]["_id"] ?></p>
+            <p><?php echo $data_arr["all"]["0"]["text"] ?></p>
+            <p><?php echo $data_arr["all"]["0"]["type"] ?></p>
             <?php   } else { ?>
             <h1>Login</h1>
             <form method="GET">
-                        <input type="email" name="email">
-                        <input type="password">
+                        <input type="email" name="email" required>
+                        <input type="password" required>
                         <br>
                         <input type="submit" value="Login">
                 </form>
