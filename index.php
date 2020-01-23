@@ -12,14 +12,14 @@
     function my_custom_dashboard_widgets() {
         global $wp_meta_boxes;
 
-        wp_add_dashboard_widget('custom_help_widget', 'Dealer Analytics', 'custom_dashboard_help');
+        wp_add_dashboard_widget('custom_help_widget', 'Dealer Analytics', 'dealer_analytics_widget');
     }
 
-    function custom_dashboard_help() {
+    function dealer_analytics_widget() {
 
         $loggedIn = NULL;
-        if(is_email($_GET['email'])) {
-            $loggedIn = sanitize_email($_GET['email']);
+        if(is_email($_POST['email'])) {
+            $loggedIn = sanitize_email($_POST['email']);
         }
 
         if(isset($loggedIn)) {
@@ -27,23 +27,29 @@
             <h1>Welcome <?=$_GET["email"];?>!</h1>
             <p>Here are your stats so far: </p>
             <?php
-                $json_data = callAPI("GET", "https://cat-fact.herokuapp.com/facts");
-                $data_arr = json_decode($json_data, true);
-                $number = rand(0, 255);
+                // $json_data = callAPI("GET", "https://cat-fact.herokuapp.com/facts");
+                // $data_arr = json_decode($json_data, true);
+                // $number = rand(0, 255);
+                if(isset($_POST["get_token"])) {
+                    $token = get_token();
+                    echo '<p>' . $token . '</p.>';
+                }
             ?>
-            <p><?php echo $data_arr["all"]["$number"]["_id"] ?></p>
+            <!-- <p><?php echo $data_arr["all"]["$number"]["_id"] ?></p>
             <p><?php echo $data_arr["all"]["${number}"]["text"] ?></p>
-            <p><?php echo $data_arr["all"][$number]["type"] ?></p>
+            <p><?php echo $data_arr["all"][$number]["type"] ?></p> -->
+
 <?php   } else { ?>
             <h1>Login</h1>
-            <form method="GET">
-                        <input type="email" name="email" required>
-                        <input type="password" required>
-                        <br>
-                        <input type="submit" value="Login">
-                </form>
+            <form method="POST">
+                <input type="email" name="email" required>
+                <input type="password" required>
+                <br>
+                <input type="submit" name="get_token" value="Login">
+            </form>
             <a href="https://dealeranalytics.com" target="_blank">Contact Us</p>
-<?php   }
+<?php
+        }
     }
 
     /**
@@ -62,5 +68,9 @@
         $output = curl_exec($curl);
         curl_close($curl);
         return $output;
+    }
+
+    function get_token() {
+        return 'this is some random string';
     }
 ?>
